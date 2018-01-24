@@ -1,0 +1,11 @@
+project: "torosent/brigade-ci-meetup"
+repository: "github.com/torosent/brigade-ci-meetup"
+cloneURL: "https://github.com/torosent/brigade-ci-meetup.git"
+# Used by GitHub to compute hooks.
+# MAKE SURE YOU CHANGE THIS. It's basically a password.
+sharedSecret: "MySuperSecret"
+# Use this to have Brigade update your project about the build.
+# You probably want this if you want pull requests or commits to show
+# the build status.
+github:
+  token: "github oauth token"
