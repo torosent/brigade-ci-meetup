@@ -25,11 +25,7 @@ events.on("after", function (e, project) {
 })
 
 events.on("error", function (e, project) {
-    events.emit("next", e, project)
-})
-
-events.on("next", function (e, project) {
-   sendStatusToGithub(e,project);
+ sendStatusToGithub(e,project);
 })
 
 function sendStatusToGithub(e,project) {
@@ -37,16 +33,21 @@ function sendStatusToGithub(e,project) {
   var m = "Hook " + c.type + " is in state " + e.cause.trigger +
     " for build " + e.commit + " of " + project.repo.name;
 
-  console.log("*************** " + m);
+  var status = e.cause.trigger;
+  if (status !== "success") {
+      status = "failure";
+  }
+  
   var gh = new Job("gh");
   gh.image = "technosophos/github-notify:latest"
   gh.env = {
     GH_REPO: project.repo.name,
-    GH_STATE: "failure",
+    GH_STATE: status,
     GH_DESCRIPTION: "brigade says YES!",
     GH_CONTEXT: "brigade",
     GH_TOKEN: project.repo.token,
     GH_COMMIT: e.commit,
   };
-  gh.run().then(() => console.log("Status updated: " + m ));
+  console.log(gh.env)
+  gh.run();
 }
