@@ -36,11 +36,11 @@ function sendStatusToGithub(e,project) {
   var gh = new Job("gh");
   gh.image = "technosophos/github-notify:latest"
   gh.env = {
-    GH_REPO: p.repo.name,
+    GH_REPO: project.repo.name,
     GH_STATE: e.cause.trigger,
     GH_DESCRIPTION: "brigade says YES!",
     GH_CONTEXT: "brigade",
-    GH_TOKEN: p.repo.token,
+    GH_TOKEN: project.repo.token,
     GH_COMMIT: e.commit,
   };
   gh.run().then(() => console.log("Status updated: " + m ));
