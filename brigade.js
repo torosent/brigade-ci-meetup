@@ -25,7 +25,11 @@ events.on("after", function (e, project) {
 })
 
 events.on("error", function (e, project) {
-  sendStatusToGithub(e,project);
+    events.emit("next", e, project)
+})
+
+events.on("next", function (e, project) {
+   sendStatusToGithub(e,project);
 })
 
 function sendStatusToGithub(e,project) {
