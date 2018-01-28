@@ -38,7 +38,7 @@ function sendStatusToGithub(e,project) {
   gh.image = "technosophos/github-notify:latest"
   gh.env = {
     GH_REPO: project.repo.name,
-    GH_STATE: e.cause.trigger,
+    GH_STATE: "failure",
     GH_DESCRIPTION: "brigade says YES!",
     GH_CONTEXT: "brigade",
     GH_TOKEN: project.repo.token,
