@@ -21,6 +21,14 @@ events.on("push", function (e, p) {
 });
 
 events.on("after", function (e, project) {
+  sendStatusToGithub(e,project);
+})
+
+events.on("error", function (e, project) {
+  sendStatusToGithub(e,project);
+})
+
+function sendStatusToGithub(e,project) {
   var c = e.cause.event
   var m = "Hook " + c.type + " is in state " + e.cause.trigger +
     " for build " + e.commit + " of " + project.repo.name;
@@ -36,4 +44,4 @@ events.on("after", function (e, project) {
     GH_COMMIT: e.commit,
   };
   gh.run().then(() => console.log("Status updated: " + m ));
-})
+}
