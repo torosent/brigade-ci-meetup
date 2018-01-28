@@ -1,6 +1,7 @@
 const {
   events,
-  Job
+  Job,
+  Group
 } = require("brigadier");
 
 events.on("push", function (e, p) {
