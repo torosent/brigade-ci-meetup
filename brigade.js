@@ -48,6 +48,5 @@ function sendStatusToGithub(e,project) {
     GH_TOKEN: project.repo.token,
     GH_COMMIT: e.commit,
   };
-  console.log(gh.env)
-  gh.run();
+  Group.runAll(gh);
 }
