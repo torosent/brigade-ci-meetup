@@ -33,6 +33,7 @@ function sendStatusToGithub(e,project) {
   var m = "Hook " + c.type + " is in state " + e.cause.trigger +
     " for build " + e.commit + " of " + project.repo.name;
 
+  console.log("*************** " + m);
   var gh = new Job("gh");
   gh.image = "technosophos/github-notify:latest"
   gh.env = {
